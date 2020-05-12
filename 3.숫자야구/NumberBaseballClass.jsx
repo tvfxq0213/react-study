@@ -19,7 +19,7 @@ class NumberBaseball extends Component {
     tries: [], // push 쓰면 안 돼요
   };
 
-  onSubmitForm = (e) => {
+  onSubmitForm = (e) => {  // 화살표 함수를 안쓰면 this. 를 사용할 수 없음
     const { value, tries, answer } = this.state;
     e.preventDefault();
     if (value === answer.join('')) {
@@ -27,6 +27,8 @@ class NumberBaseball extends Component {
         return {
           result: '홈런!',
           tries: [...prevState.tries, { try: value, result: '홈런!' }],
+          // 그냥 push를 하면 react가 값이 변한걸 알수가 없음
+          // 그래서 복제한 배열을 하나 더 만들어주고, 예전 배열과 복제된 배열(값이 변경된 배열)을 비교함 
         }
       });
       alert('게임을 다시 시작합니다!');
@@ -51,7 +53,7 @@ class NumberBaseball extends Component {
           tries: [],
         });
         this.inputRef.current.focus();
-      } else {
+      } else { //10번 이하로 틀렸을 때
         for (let i = 0; i < 4; i += 1) {
           if (answerArray[i] === answer[i]) {
             strike += 1;
@@ -90,8 +92,8 @@ class NumberBaseball extends Component {
         <div>시도: {tries.length}</div>
         <ul> 
           {tries.map((v, i) => { // 리액트 반복문 i는 몇번째
-            return (
-              <Try key={`${i + 1}차 시도 :`} tryInfo={v} />
+            return ( // 코드가 길어진다면 컴포넌트 별로 잘게 쪼개서 사용한다. 
+              <Try key={`${i + 1}차 시도 :`} tryInfo={v} /> //Try 에서의 연결 고리를 만들어 줌
             ); // 중괄호 없애면 return 안써도 됨
           })}
 
@@ -116,3 +118,5 @@ class NumberBaseball extends Component {
 // node에서 import쓰면 에러남 jsx에서는 바벨에서 require로 바꿔줌
 export default NumberBaseball; // import NumberBaseball 한번만 쓸수 있음 ;
 //module.exports 는 엄밀히 말하자면 다르나, 호환이 되긴 한다. 
+
+// redux , context 등은 부모 이상들의 유산을 물려 받을 때 쓴다. 
