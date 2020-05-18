@@ -81,7 +81,7 @@ class NumberBaseball extends Component {
 
   inputRef = createRef(); // this.inputRef
 
-  render() {
+  render() { //render 안에 setState 생성하면 안됨
     const { result, value, tries } = this.state;
     return (
       <>

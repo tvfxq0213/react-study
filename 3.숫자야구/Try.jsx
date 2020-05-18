@@ -1,15 +1,18 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, memo } from 'react';
 
-class Try extends Component {
-  render () {
+const Try = memo(({tryInfo}) => {
+ // const [result, setResult] = useState(tryinfo.result);
+  const onClick = () => {
+    setResult('1');
+  }
     return (
       <li >
-        <div>{this.props.tryInfo.try}</div>
-        <div>{this.props.tryInfo.result}</div>
+        <div>{tryInfo.try}</div>
+        <div>{tryInfo.result}</div>
       </li>
     )
-  }
-}
+  
+});
 /*
 const Try = ({tryInfo}) => {
   return (

@@ -82,7 +82,16 @@ const NumberBaseball = () => {
         <button>입력!</button>
       </form>
       <div>시도: {tries.length}</div>
-      <ul>
+      <ul>{//return 내부에 for와 if 쓰기
+      //jsx에서는 배열로 jsx를 담아서 리턴이 가능함
+      /*
+        (() => {
+          for (let i=0; i <tries.length ; i++) {
+            array.push(<Try key={`$i+1}차 시도 : ${v.try}`} tryInfo={v}/>);
+          }
+          return array;
+        })()*/
+        }
         {tries.map((v, i) => (
           <Try key={`${i + 1}차 시도 : ${v.try}`} tryInfo={v}/>
         ))}
