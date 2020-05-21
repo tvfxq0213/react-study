@@ -1,12 +1,12 @@
 {
-  "name": "rock-scissors-paper",
+  "name": "lotto",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "build": "webpack   --config ./webpack-config.js"
-    },
+    "build": "webpack"
+  },
   "author": "ZeroCho",
   "license": "ISC",
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-hot-loader": "^4.8.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.3.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }
