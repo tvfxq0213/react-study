@@ -92,7 +92,7 @@ const reducer = (state, action) => {
       const checked = [];
       let openedCount = 0;
       console.log(tableData.length, tableData[0].length);
-      const checkAround = (row, cell) => {
+      const checkAround = (row, cell) => { // 내가 누른 칸이 있으면 그 칸 주변으로 검사하는 것
         console.log(row, cell);
         if (row < 0 || row >= tableData.length || cell < 0 || cell >= tableData[0].length) {
           return;
@@ -183,7 +183,7 @@ const reducer = (state, action) => {
         tableData,
       };
     }
-    case QUESTION_CELL: {
+    case QUESTION_CELL: { //확신이 잘 안들 때 물음표
       const tableData = [...state.tableData];
       tableData[action.row] = [...state.tableData[action.row]];
       if (tableData[action.row][action.cell] === CODE.FLAG_MINE) {
@@ -223,6 +223,7 @@ const reducer = (state, action) => {
 const MineSearch = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { tableData, halted, timer, result } = state;
+  // 코드가 길어질 땐 코드 분해
 
   const value = useMemo(() => ({ tableData, halted, dispatch }), [tableData, halted]); //state.tableData가 업데이트 되어야 실행됨
 

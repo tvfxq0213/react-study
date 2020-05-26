@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, memo, useMemo } from 'react';
 import { CLICK_MINE, CODE, FLAG_CELL, NORMALIZE_CELL, OPEN_CELL, QUESTION_CELL, TableContext } from './MineSearch';
-
+// 액션들을 모두 import 시켜야 함
 const getTdStyle = (code) => {
   switch (code) {
     case CODE.NORMAL:
@@ -62,12 +62,12 @@ const Td = memo(({ rowIndex, cellIndex }) => {
       case CODE.FLAG_MINE:
       case CODE.FLAG:
       case CODE.QUESTION_MINE:
-      case CODE.QUESTION:
+      case CODE.QUESTION: // 클릭이 안되는 칸
         return;
-      case CODE.NORMAL:
+      case CODE.NORMAL: //보통의 칸
         dispatch({ type: OPEN_CELL, row: rowIndex, cell: cellIndex });
         return;
-      case CODE.MINE:
+      case CODE.MINE: //지뢰가 있는 칸은 펑 터지게 함
         dispatch({ type: CLICK_MINE, row: rowIndex, cell: cellIndex });
         return;
       default:
@@ -75,8 +75,8 @@ const Td = memo(({ rowIndex, cellIndex }) => {
     }
   }, [tableData[rowIndex][cellIndex], halted]);
 
-  const onRightClickTd = useCallback((e) => {
-    e.preventDefault();
+  const onRightClickTd = useCallback((e) => { //오른쪽 클릭
+    e.preventDefault(); // 오른쪽 클릭하면 뜨는 메뉴를 안 뜨게 함
     if (halted) {
       return;
     }
@@ -109,7 +109,7 @@ const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
     <td
       style={getTdStyle(data)}
       onClick={onClickTd}
-      onContextMenu={onRightClickTd}
+      onContextMenu={onRightClickTd} // 오른쪽 클릭 이벤트를 넣기 위함
     >{getTdText(data)}</td>
   )
 });
