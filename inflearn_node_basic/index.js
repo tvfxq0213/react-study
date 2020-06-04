@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const {User} = require('./models/User');
 const config = require('./config/key');
+const {auth} = require('./middleware/auth');
 
 //application /x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended:true}));
@@ -24,7 +25,7 @@ mongoose.connect(config.mongoURI, {
 app.get('/', (req, res) => res.send('Hello World!effdf 새해복 많이받으세요'))
 
 
-app.post('/register', (req,res) => {
+app.post('/api/users/register', (req,res) => {
   //회원가입할때 필요한 정보를 client에서 가져오면, 
   //그것들을 데이터 베이스에 넣어주나. 
  
@@ -38,7 +39,7 @@ app.post('/register', (req,res) => {
   })
 });
 
-app.post('./login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
   // 요청된 이메일을 데이터베이스에서 있는지 찾는다.
 
   user.findOne({email : req.body.email }, (err, user) => {
@@ -64,8 +65,34 @@ app.post('./login', (req, res) => {
       });
   })
   // 비밀번호까지 같다면 token생성하기
+});
 
-  
+app.get('/api/users/auth', auth , (req, res) => {
+  //auth 라는 middleware 를 추가함
+
+  // 여기까지 미들웨어를 통과해 왔다는 얘기는 auth 이 true라는 말
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin:req.user.role === 0 ? false : true, // 0이 아니면 관리자
+    isAuth: true,
+    email : req.user.email,
+    name : req.user.name,
+    lastname : req.user.lastname,
+    role: req.user.role,
+    image: req.user.image
+  })
+  //req.user;
+  //req.token;
 })
+
+app.get('/api/users/logout', auth, (res, req) => {
+  User.findOneAndUpdate({_id : req.user._id}, {token : ""}, (err, user) => {
+    if(err) return res.json({success:false, err})
+    return res.status(200).send({
+      success:true
+    })
+  })
+
+});
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
