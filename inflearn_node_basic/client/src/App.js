@@ -26,10 +26,10 @@ function App() {
           <Route exact path="/" component={LandingPage}>
             <LandingPage />
           </Route>
-          <Route path="/login" component={LoginPage}>
+          <Route  exact path="/login" component={LoginPage}>
             <LoginPage />
           </Route>
-          <Route path="/register" component={RegisterPage}>
+          <Route  exact path="/register" component={RegisterPage}>
             <RegisterPage />
           </Route>
         </Switch>
