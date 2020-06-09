@@ -95,4 +95,9 @@ app.get('/api/users/logout', auth, (res, req) => {
 
 });
 
+
+app.get('/api/hello', (req, res) => {
+  ref.send("안녕하세요");
+})
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
