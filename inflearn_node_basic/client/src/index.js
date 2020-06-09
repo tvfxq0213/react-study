@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { DatePicker } from 'antd';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+
 
 ReactDOM.render(
   <React.StrictMode>
