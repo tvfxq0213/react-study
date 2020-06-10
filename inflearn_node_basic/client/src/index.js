@@ -3,14 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { DatePicker } from 'antd';
+import { Provider } from 'react-redux';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import { applyMiddleware, createStore } from 'redux';
+import promiseMiddleWare from 'redux-promise';
+import ReduxThunk from 'redux-thunk';
+import Reducer from './_reducers/index';
 
+
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleWare,ReduxThunk)(createStore);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider
+    store={createStoreWithMiddleware(Reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__()
+      )}
+  >
     <App />
-  </React.StrictMode>,
+  </Provider>,
+  
   document.getElementById('root')
 );
 
