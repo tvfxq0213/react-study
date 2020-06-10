@@ -55,7 +55,7 @@ userSchema.pre('save', function (next){
 
 }); // 유저정보를 저장하기 전에 무엇을 한다.
 
-userSchema.method.comparePassword = function(plainPassword, cb){
+userSchema.methods.comparePassword = function(plainPassword, cb){
   
   //plainPassword 와 암호화된 비밀번호와 비교해야함
   bcrypt.compare(plainPassword, this.password, function (err, isMatch){
@@ -64,7 +64,7 @@ userSchema.method.comparePassword = function(plainPassword, cb){
   })
 }
 
-userSchema.method.genetateToken = function(cb){
+userSchema.methods.generateToken = function(cb){
 
   var user =this;
   var token = jwt.sign(user._id.toHexString(),'secretToken')
@@ -73,7 +73,6 @@ userSchema.method.genetateToken = function(cb){
     if(err) return cb(err)
     cb(null,user)
   })
-
 
   // jsonwebtoken 을 웹 토큰 생성
 }

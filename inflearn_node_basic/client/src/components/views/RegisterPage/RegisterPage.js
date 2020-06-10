@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
+import { withRouter } from 'react-router'; 
 import {registerUser} from '../../../_actions/user_action';
 
 function RegisterPage(props) {
@@ -41,7 +42,7 @@ function RegisterPage(props) {
     dispatch(registerUser(body))
     .then(response =>{
       if(response.payload.success){
-        props.history.push('/login')
+        props.history.Push('/login')
       }else{
         alert('Failed to dign up');
       }
