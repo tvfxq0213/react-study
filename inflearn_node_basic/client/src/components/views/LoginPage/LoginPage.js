@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import Axios from 'axios';
+import '../../../index.scss';
 import {Router, Route, hashHistory} from 'react-router'; 
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
+
 
 function LoginPage(props) {
 
@@ -51,12 +52,15 @@ function LoginPage(props) {
     }}>
 
       <form onSubmit={onSubmitHandler} style={{display:'flex', flexDirection:'column'}}>
-        <label>Email</label>
-        <input type="email" value={Email} onChange={onEmailHandler} />
-        <label>Password</label>
-        <input type="password" value={Password} onChange={onPasswordHandler}/>
-        <br/>
-        <button>
+        <div className="inputWrap">
+          <label>Email</label>
+          <input type="email" value={Email} onChange={onEmailHandler} />
+        </div>
+        <div className="inputWrap">
+          <label>Password</label>
+          <input type="password" value={Password} onChange={onPasswordHandler}/>
+        </div>
+        <button className="btn btn-primary">
           Login
         </button>
       </form>
