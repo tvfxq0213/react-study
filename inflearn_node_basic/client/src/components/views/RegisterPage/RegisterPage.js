@@ -42,7 +42,7 @@ function RegisterPage(props) {
     dispatch(registerUser(body))
     .then(response =>{
       if(response.payload.success){
-        props.history.Push('/login')
+        props.history.push('/login')
       }else{
         alert('Failed to dign up');
       }
