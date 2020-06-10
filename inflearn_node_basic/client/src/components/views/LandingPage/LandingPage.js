@@ -3,15 +3,11 @@ import axios from 'axios'
 
 function LandingPage() {
 
-  useEffect(() =>{
-    axios.get('/api/hello')
-    .then(response => console.log(response.data))
-  }, [])
-
+ 
   return (
-    <div>
+    <div className="LandingPage">
 
-        LandingPage 랜딩페이지
+        <h2>시작 페이지</h2>
     </div>
   )
 }

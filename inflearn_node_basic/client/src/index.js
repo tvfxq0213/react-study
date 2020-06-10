@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
@@ -10,19 +10,25 @@ import promiseMiddleWare from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers/index';
 
+import { Provider } from 'react-redux';
+import { applyMiddleware , createStore} from 'redux';
+import promiseMiddleWare from 'redux-promise';
+import ReduxThunk from 'redux-thunk';
+import Reducer from './_reducers';
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleWare,ReduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleWare, ReduxThunk)(createStore)
+
 
 ReactDOM.render(
   <Provider
-    store={createStoreWithMiddleware(Reducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__()
-      )}
+    store = {
+      createStoreWithMiddleware(Reducer, 
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        )
+    }
   >
     <App />
   </Provider>,
-  
   document.getElementById('root')
 );
 
