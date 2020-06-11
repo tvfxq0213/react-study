@@ -2,13 +2,13 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
 import LandingPage from './components/views/LandingPage/LandingPage'
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
-
+import Auth from './hoc/auth';
 
 function App() {
   return (
@@ -23,13 +23,13 @@ function App() {
           of them to render at a time
         */}
         <Switch>
-          <Route exact path="/" component={LandingPage}>
+          <Route exact path="/" component={Auth(LandingPage ,null, true)}>
             <LandingPage />
           </Route>
-          <Route  exact path="/login" component={LoginPage}>
+          <Route  exact path="/login" component={Auth(LoginPage, false)}>
             <LoginPage />
           </Route>
-          <Route  exact path="/register" component={RegisterPage}>
+          <Route  exact path="/register" component={Auth(RegisterPage, false)}>
             <RegisterPage />
           </Route>
         </Switch>
@@ -38,28 +38,5 @@ function App() {
   );
 }
 
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
 
 export default App;
