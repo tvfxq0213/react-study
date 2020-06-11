@@ -11,6 +11,7 @@ const {auth} = require('./middleware/auth');
 app.use(bodyParser.urlencoded({extended:true}));
 //applisction/json 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const mongoose = require('mongoose');
 mongoose.connect(config.mongoURI, {
@@ -44,6 +45,7 @@ app.post('/api/users/login', (req, res) => {
   // 요청된 이메일을 데이터베이스에서 있는지 찾는다.
 
   User.findOne({email : req.body.email }, (err, user) => {
+
     if(!user){
       return res.json({
         loginSuccess: false,
@@ -60,7 +62,8 @@ app.post('/api/users/login', (req, res) => {
           user.generateToken((err, user) => {
             if(err) return res.status(400).send(err);
             // 토큰을 저장한다. 어디에? 쿠키 / 로컬스토리지
-            res.cookie("x_auth", user.token).status(200)
+            res.cookie("x_auth", user.token)
+            .status(200)
             .json({loginSuccess:true, userId: user._id})
 
           });
@@ -74,6 +77,7 @@ app.post('/api/users/login', (req, res) => {
 
 app.get('/api/users/auth', auth , (req, res) => {
   //auth 라는 middleware 를 추가함
+  console.log("Cookies: ", req.cookies)
 
   // 여기까지 미들웨어를 통과해 왔다는 얘기는 auth 이 true라는 말
   res.status(200).json({
@@ -90,9 +94,13 @@ app.get('/api/users/auth', auth , (req, res) => {
   //req.token;
 })
 
-app.get('/api/users/logout', auth, (res, req) => {
+app.get('/api/users/logout', auth, (req, res) => {
 
-  User.findOneAndUpdate({_id : req.user._id}, {token : ""}, (err, user) => {
+  console.log('logout');
+
+  User.findOneAndUpdate({_id : req.user._id}, 
+    {token : ""}, 
+    (err, user) => {
     if(err) return res.json({success:false, err})
     return res.status(200).send({
       success:true
