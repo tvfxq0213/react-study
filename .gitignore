@@ -1,2 +1,4 @@
 */node_modules/
 */config/
+inflearn_movie/server/config/dev.js
+inflearn_movie/client/src/components/Config.js
