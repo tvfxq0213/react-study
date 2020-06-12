@@ -18,7 +18,6 @@ function LandingPage() {
             setMovies([...response.results])
             setMainMovieImage(response.results[0]);
 
-            console.log(response.results[0])
         })
     }, [])
     return (
