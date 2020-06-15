@@ -44,7 +44,7 @@ function LandingPage() {
                 <MainImage 
                 title={MainMovieImage.original_title}
                 text={MainMovieImage.overview}
-                image={`${IMAGE_BASE_URL}w1280/${MainMovieImage.backdrop_path}`}
+                image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`}
                 />
             }
             <div style={{width:'85%', margin:'1rem auto'}}>
