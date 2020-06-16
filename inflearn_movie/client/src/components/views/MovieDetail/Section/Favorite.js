@@ -20,6 +20,8 @@ function Favorite(props) {
     .then(response => {
        if(response.data.success){
 
+        console.log(response.data);
+
        } else {
           alert('숫자 정보를 가져오는데 실패했습니다.');
        }
