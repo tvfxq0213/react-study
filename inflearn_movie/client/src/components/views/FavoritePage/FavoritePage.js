@@ -10,7 +10,7 @@ function FavoritePage(props) {
 
   useEffect(()=>{
 
-    Axios.post('/api/favorite/getFavoriteMovie', {userForm: localStorage.getItem('userId')})
+    Axios.post('/api/favorite/getFavoriteMovie', {userFrom: localStorage.getItem('userId')})
     .then(response => {
       if(response.data.success){
         console.log(response.data)
