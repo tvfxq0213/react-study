@@ -16,7 +16,9 @@ function Favorite(props) {
       movieId
     }
 
-    Axios.post('/api/favorite/favoriteNumber', variables )
+    console.log(variables)
+
+    Axios.post('/api/favorite/favoritenumber', variables )
     .then(response => {
        if(response.data.success){
 

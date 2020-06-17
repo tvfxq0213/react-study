@@ -3,10 +3,9 @@ import React from 'react';
 
 function MainImage(props){
 
-  console.log(props);
   return (
 
-    <div style={{ background:  `URL('${props.image}'), #1c1c1c`, 
+    <div style={{ background:  `URL('${props.image}')`, 
     position:'relative', 
     height: '500px', 
     width:'100%', 

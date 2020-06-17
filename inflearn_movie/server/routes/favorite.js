@@ -7,7 +7,8 @@ const { Favorite } = require("../models/Favorite");
 //             Favorite
 //=================================
 
-router.post("/api/favorite/favoriteNumber", (req, res) => {
+
+router.post("/favoritenumber", (req, res) => {
 
 
   console.log(req.body.movieId)
