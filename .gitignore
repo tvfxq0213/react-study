@@ -2,3 +2,4 @@
 */config/
 inflearn_movie/server/config/dev.js
 inflearn_movie/client/src/components/Config.js
+inflearn_youtube/server/config/dev.js
