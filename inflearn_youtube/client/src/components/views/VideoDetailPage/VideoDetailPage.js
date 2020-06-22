@@ -1,6 +1,7 @@
 import React , { useEffect, useState } from 'react'
-import { List, Avatar, Row, Col } from 'antd';
+import { List, Avatar, Row, Col, Button  } from 'antd';
 import Axios from 'axios';
+import DeleteBtn from './deleteBtn.js';
 
 function VideoDetailPage(props) {
 
@@ -9,8 +10,8 @@ function VideoDetailPage(props) {
     videoId
   }
 
-
   const [VideoDetail, setVideoDetail] = useState([]);
+
 
   useEffect(()=>{
     Axios.post('/api/video/getVideoDetail', variable)
@@ -23,6 +24,8 @@ function VideoDetailPage(props) {
         }
     })
   }, [props.match.params.videoId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
+
+  
 
   if (VideoDetail.writer) {
 
@@ -48,7 +51,9 @@ function VideoDetailPage(props) {
               </List.Item>
               {/*comment */}
            </div>
-
+           <div>
+            <DeleteBtn videoId= {videoId} isAuth={props.user.userData.isAuth}/>
+           </div>
           </Col>
 
           <Col lg={6} xs={24}>
@@ -60,7 +65,8 @@ function VideoDetailPage(props) {
   
       </div>
     )
-  }else{
+  }
+  else{
     return ( <div>loading</div>)
   }
 }

@@ -119,4 +119,15 @@ router.post('/getVideoDetail', (req,res)=>{
   })
 
 });
+
+router.post("/deleteVideo", (req, res) => {
+
+  Video.findOneAndDelete({"_id":req.body.videoId})
+  .exec((err, result)=>{
+    if(err) return res.status(400).send(err)
+    return res.status(200).json({success:true})
+  })
+
+});
+
 module.exports = router;
