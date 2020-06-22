@@ -105,11 +105,13 @@ function UploadVideoPage(props) {
 
               console.log(response.data);
 
+
+
                 let variable = {
                     filePath: response.data.url,
                     fileName: response.data.fileName
                 }
-                setFilePath(response.data.filePath)
+                setFilePath(response.data.url)
 
                 //gerenate thumbnail with this filepath ! 
 

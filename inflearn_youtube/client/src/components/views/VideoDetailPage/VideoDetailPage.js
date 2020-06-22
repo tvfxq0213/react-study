@@ -9,7 +9,6 @@ function VideoDetailPage(props) {
     videoId
   }
 
-  console.log(videoId)
 
   const [VideoDetail, setVideoDetail] = useState([]);
 
@@ -23,7 +22,7 @@ function VideoDetailPage(props) {
             alert('Failed to get video Info')
         }
     })
-  })
+  }, [props.match.params.videoId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
 
   if (VideoDetail.writer) {
 
@@ -34,12 +33,15 @@ function VideoDetailPage(props) {
           <Col lg={18} xs={24}>
 
             <div style={{width:'100%', padding: '3rem 4rem'}}>
-              <video style={{width:"100%"}} controls/>
+              <video style={{width:"100%"}} 
+              src={`http://localhost:5000/${VideoDetail.filePath}`} 
+              poster={`http://localhost:5000/${VideoDetail.thumbnail}`}
+              controls/>
               <List.Item 
               actions>
                 <List.Item.Meta
                   avatar={<Avatar src={VideoDetail.writer.image}></Avatar>}
-                  title={VideoDetail.writer.name}
+                  title={VideoDetail.title}
                   description={VideoDetail.description}
                   />
 
