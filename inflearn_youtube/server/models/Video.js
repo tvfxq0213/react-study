@@ -1,58 +1,39 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const moment = require("moment");
+const Schema = mongoose.Schema
+
 
 const videoSchema = mongoose.Schema({
-    name: {
-        type:String,
+
+    writer:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    title:{
+        type: String,
         maxlength:50
     },
-    email: {
-        type:String,
-        trim:true,
-        unique: 1 
-    },
-    password: {
+    description:{
         type: String,
-        minglength: 5
     },
-    lastname: {
+    privacy:{
+        type:Number
+    },
+    filePath:{
         type:String,
-        maxlength: 50
     },
-    role : {
+    views:{
         type:Number,
-        default: 0 
+        default:0
     },
-    image: String,
-    token : {
-        type: String,
+    duration:{
+        type: String
     },
-    tokenExp :{
-        type: Number
+    thumbnail: {
+        type:String
     }
-})
-
-
-videoSchema.pre('save', function( next ) {
-    var user = this;
     
-    if(user.isModified('password')){    
-        // console.log('password changed')
-        bcrypt.genSalt(saltRounds, function(err, salt){
-            if(err) return next(err);
-    
-            bcrypt.hash(user.password, salt, function(err, hash){
-                if(err) return next(err);
-                user.password = hash 
-                next()
-            })
-        })
-    } else {
-        next()
-    }
-});
+}, {timestamp: true})
+
 
 
 const Video = mongoose.model('Video', videoSchema);

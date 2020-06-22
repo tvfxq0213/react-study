@@ -4,7 +4,6 @@ import Dropzone from 'react-dropzone';
 import Axios from 'axios';
 import { useSelector } from "react-redux";
 
-import { responsiveArray } from 'antd/lib/_util/responsiveObserve';
 
 const {TextArea} = Input;
 const {Title} = Typography;
@@ -80,7 +79,10 @@ function UploadVideoPage(props) {
           .then(response => {
               if (response.data.success) {
                   alert('video Uploaded Successfully')
-                  props.history.push('/')
+                  setTimeout(()=> {
+                    props.history.push('/')
+
+                  },3000)
               } else {
                   alert('Failed to upload video')
               }
@@ -116,8 +118,8 @@ function UploadVideoPage(props) {
                       console.log(response.data);
                         if (response.data.success) {
                           console.log(response.data);
-                          //  setDuration(response.data.fileDuration)
-                          //  setThumbnail(response.data.thumbsFilePath)
+                            setDuration(response.data.fileDuration)
+                            setThumbnailPath(response.data.thumbsFilePath)
                         } else {
                             alert('Failed to make the thumbnails');
                         }
@@ -153,9 +155,11 @@ function UploadVideoPage(props) {
                 </div>
             )}
           </Dropzone>
-          <div>
-            <img src={`http://localhost:5000/${ThumbnailPath}`} alt="" />
-          </div>
+          {ThumbnailPath !== "" &&
+            <div>
+              <img src={`http://localhost:5000/${ThumbnailPath}`} alt="haha" />
+            </div>
+          }
         </div>
         <label>Title</label>
         <Input 
@@ -188,7 +192,7 @@ function UploadVideoPage(props) {
         <br/>
         <br/>
 
-        <Button type="primary" size="large" >
+        <Button type="primary" onClick={onSubmit} size="large" >
           Submit
         </Button>
 
