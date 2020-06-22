@@ -29,7 +29,8 @@
 
 .menu__container .ant-menu-item a,
 .menu__container .ant-menu-submenu-title a {
-  padding: 10px 15px;
+  padding: 10px 20px;
+  display: block;
 }
 
 .menu__container .ant-menu-horizontal {
@@ -40,7 +41,7 @@
   float: left;
 }
 
-.menu__container .menu_rigth {
+.menu__container .menu_right {
   float: right;
 }
 
