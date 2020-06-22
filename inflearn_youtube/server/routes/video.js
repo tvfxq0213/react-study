@@ -73,9 +73,9 @@ router.post("/thumbnail", (req, res) => {
       })
       .screenshots({
           // Will take screens at 20%, 40%, 60% and 80% of the video
-          count: 3,
+          count: 1,
           folder: 'uploads/thumbnails',
-          size:'320x240',
+          size:'640x360',
           // %b input basename ( filename w/o extension )
           filename:'thumbnail-%b.png'
       });
