@@ -2,6 +2,8 @@ import React , { useEffect, useState } from 'react'
 import { List, Avatar, Row, Col, Button  } from 'antd';
 import Axios from 'axios';
 import DeleteBtn from './deleteBtn.js';
+import SideVideo from './Sections/SideVideo.js';
+import Subscribe from './Sections/Subscribe';
 
 function VideoDetailPage(props) {
 
@@ -41,7 +43,7 @@ function VideoDetailPage(props) {
               poster={`http://localhost:5000/${VideoDetail.thumbnail}`}
               controls/>
               <List.Item 
-              actions>
+              actions={[<Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>]}>
                 <List.Item.Meta
                   avatar={<Avatar src={VideoDetail.writer.image}></Avatar>}
                   title={VideoDetail.title}
@@ -57,8 +59,7 @@ function VideoDetailPage(props) {
           </Col>
 
           <Col lg={6} xs={24}>
-
-            Side Nav
+            <SideVideo/>
           </Col>
 
         </Row>
