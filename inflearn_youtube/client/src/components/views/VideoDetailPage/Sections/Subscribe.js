@@ -13,7 +13,6 @@ function Subscribe(props) {
     Axios.post('/api/subscribe/subscribeNumber', variable)
     .then(response => {
       if(response.data.success){
-        console.log(response.data);
         setSubscribeNumber(response.data.subscribeNumber)
       }else{
         alert('구독자 수 정보를 받아오지 못했습니다. ')
@@ -25,10 +24,7 @@ function Subscribe(props) {
     Axios.post('/api/subscribe/subscribed', subscribedVariable)
     .then(response=>{
       if(response.data.success){
-        console.log(response.data);
-
         setSubscribed(response.data.subscribed)
-
       }else{
         alert("정보를 받아오지 못했습니다.")
       }
@@ -47,8 +43,6 @@ function Subscribe(props) {
       Axios.post('/api/subscribe/unSubscribe', subscribedVariable)
       .then(response => {
         if(response.data.success){
-          console.log("구독취소"+response.data);
-
           setSubscribeNumber(SubscribeNumber-1);
           setSubscribed(!Subscribed)
 

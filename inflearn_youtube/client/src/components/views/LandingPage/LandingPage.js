@@ -16,9 +16,7 @@ function LandingPage() {
         Axios.get('/api/video/getVideos')
         .then(response => {
             if(response.data.success){
-                console.log(response.data);
                 setVideo(response.data.videos)
-
             }else{
                 alert("비디오 가져오기를 실패 했습니다.");
             }
@@ -67,7 +65,6 @@ function LandingPage() {
             <hr/>
             <Row gutter={[32, 16]}>
                 {renderCards}
-
             </Row>
 
         </div>
