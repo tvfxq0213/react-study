@@ -17,15 +17,13 @@ function deleteBtn(props) {
       if( response.data.success) {
         alert('비디오가 삭제되었습니다.')
         props.history.push('/')
-
-
       }else{
         alert('영상을 삭제하는데 실패했습니다.')
       }
     })
 
   }
-  if(props.isAuth === true) { 
+  if(props.userId) { 
 
     return (
         <div style={{display:'flex', justifyContent:'flex-end'}}>

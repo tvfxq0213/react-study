@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from 'react'
 import { List, Avatar, Row, Col, Button  } from 'antd';
 import Axios from 'axios';
-import DeleteBtn from './deleteBtn.js';
+import DeleteBtn from './Sections/deleteBtn.js';
 import SideVideo from './Sections/SideVideo.js';
 import Subscribe from './Sections/Subscribe';
 
@@ -13,14 +13,19 @@ function VideoDetailPage(props) {
   }
 
   const [VideoDetail, setVideoDetail] = useState([]);
+  const [DeleteBtnShow, setDeleteBtnShow] = useState(false);
+
 
 
   useEffect(()=>{
     Axios.post('/api/video/getVideoDetail', variable)
     .then(response => {
         if (response.data.success) {
-            console.log(response.data.video)
             setVideoDetail(response.data.video)
+            if(response.data.video.writer._id == localStorage.getItem('userId')){ 
+              // 작성자와 로그인한 userId가 같아야 삭제 버튼이 나타남
+              setDeleteBtnShow(!DeleteBtnShow);
+            }
         } else {
             alert('Failed to get video Info')
         }
@@ -54,7 +59,7 @@ function VideoDetailPage(props) {
               {/*comment */}
            </div>
            <div>
-            <DeleteBtn videoId= {videoId} isAuth={props.user.userData.isAuth}/>
+            {DeleteBtnShow ? <DeleteBtn videoId= {videoId} userId={localStorage.getItem('userId')}/> : ''}
            </div>
           </Col>
 
