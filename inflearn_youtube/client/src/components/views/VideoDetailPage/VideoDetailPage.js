@@ -4,6 +4,7 @@ import Axios from 'axios';
 import DeleteBtn from './Sections/deleteBtn.js';
 import SideVideo from './Sections/SideVideo.js';
 import Subscribe from './Sections/Subscribe';
+import Comment from './Sections/Comment';
 
 function VideoDetailPage(props) {
 
@@ -14,6 +15,8 @@ function VideoDetailPage(props) {
 
   const [VideoDetail, setVideoDetail] = useState([]);
   const [DeleteBtnShow, setDeleteBtnShow] = useState(false);
+
+  const [Comments, setComments] = useState([]);
 
 
 
@@ -35,6 +38,7 @@ function VideoDetailPage(props) {
   
 
   if (VideoDetail.writer) {
+    const subscribeBtn  = VideoDetail.writer._id !== VideoDetail.writer._id && <Subscribe userTo={VideoDetail.writer._id} userFrom={VideoDetail.writer._id}/>
 
     return (
       <div>
@@ -48,7 +52,7 @@ function VideoDetailPage(props) {
               poster={`http://localhost:5000/${VideoDetail.thumbnail}`}
               controls/>
               <List.Item 
-              actions={[<Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>]}>
+              actions={[subscribeBtn]}>
                 <List.Item.Meta
                   avatar={<Avatar src={VideoDetail.writer.image}></Avatar>}
                   title={VideoDetail.title}
@@ -57,6 +61,7 @@ function VideoDetailPage(props) {
 
               </List.Item>
               {/*comment */}
+              <Comment postId={videoId}/>
            </div>
            <div>
             {DeleteBtnShow ? <DeleteBtn videoId= {videoId} userId={localStorage.getItem('userId')}/> : ''}

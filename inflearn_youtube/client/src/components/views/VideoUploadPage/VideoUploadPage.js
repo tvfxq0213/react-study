@@ -38,8 +38,6 @@ function UploadVideoPage(props) {
   }
 
   const handleChangeDecsription = (event) => {
-      console.log(event.currentTarget.value)
-
       setDescription(event.currentTarget.value)
   }
 
@@ -97,17 +95,11 @@ function UploadVideoPage(props) {
     const config = {
         header: { 'content-type': 'multipart/form-data' }
     }
-    console.log(files)
     formData.append("file", files[0])
 
     Axios.post('/api/video/uploadfiles', formData, config)
         .then(response => {
             if (response.data.success) {
-
-              console.log(response.data);
-
-
-
                 let variable = {
                     filePath: response.data.url,
                     fileName: response.data.fileName
