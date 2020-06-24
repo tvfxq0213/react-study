@@ -17,6 +17,7 @@ function VideoDetailPage(props) {
   const [DeleteBtnShow, setDeleteBtnShow] = useState(false);
 
   const [Comments, setComments] = useState([]);
+  
 
 
 
@@ -34,6 +35,24 @@ function VideoDetailPage(props) {
         }
     })
   }, [props.match.params.videoId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
+
+
+  useEffect(()=>{
+    Axios.post('/api/comment/getComment', variable)
+    .then(response => {
+        if (response.data.success) {
+          console.log(response.data);
+          setComments(response.data.comments);
+        } else {
+            alert('Failed to get video Info')
+        }
+    })
+  },[])
+
+  const updateComment = (newComment) => {
+    setComments(Comments.concat(newComment))
+  }
+
 
   
 
@@ -61,7 +80,7 @@ function VideoDetailPage(props) {
 
               </List.Item>
               {/*comment */}
-              <Comment postId={videoId}/>
+              <Comment refreshFunction={updateComment} commentLists={Comments} postId={videoId}/>
            </div>
            <div>
             {DeleteBtnShow ? <DeleteBtn videoId= {videoId} userId={localStorage.getItem('userId')}/> : ''}

@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import Axios from 'axios';
 import { useSelector } from 'react-redux'
+import SingleComment from './SingleComment'
 
 function Comment(props) {
   const user = useSelector(state => state.user)
-  const [commentValue, setcommentValue] = useState("")
+  const [CommentValue, setCommentValue] = useState("")
   const handleClick= (event) =>{
 
-    setcommentValue(event.currentTarget.value)
+    setCommentValue(event.currentTarget.value)
 
   }
 
@@ -15,7 +16,7 @@ function Comment(props) {
     event.preventDefault();
 
     const variables = {
-      content: commentValue,
+      content: CommentValue,
       writer: user.userData._id, 
       postId: props.postId
 
@@ -25,8 +26,10 @@ function Comment(props) {
     .then(response => {
       if(response.data.success){
 
-
+        props.refreshFunction(response.data.result)
         console.log(response.data.result);
+        setCommentValue("")
+
 
       }else{
         alert("코멘트를 저장하지 못했습니다.")
@@ -42,13 +45,19 @@ function Comment(props) {
 
       {/* comment Lists*/}
 
+      {props.commentLists && props.commentLists.map((comment,index)=>(
+        (!comment.responseTo && 
+          <SingleComment refreshFunction={props.refreshFunction} comment={comment} key={index} postId={props.videoId}/>
+        )
+      ))}
+
       {/*Root comment Form */}
 
       <form style={{display:'flex'}} onSubmit={onSubmit}>
         <textarea
           style={{width:'100%', borderRadius:'5px'}}
           onChange={handleClick}
-          value={commentValue}
+          value={CommentValue}
           placeholder="코멘트를 작성해 주세요"
           />
           <br/>
