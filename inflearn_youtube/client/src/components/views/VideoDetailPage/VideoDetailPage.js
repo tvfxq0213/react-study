@@ -34,7 +34,7 @@ function VideoDetailPage(props) {
             alert('Failed to get video Info')
         }
     })
-  }, [props.match.params.videoId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
+  }, [videoId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
 
 
   useEffect(()=>{

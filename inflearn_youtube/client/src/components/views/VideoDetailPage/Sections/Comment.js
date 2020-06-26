@@ -41,8 +41,6 @@ function Comment(props) {
       }
     })
   }
-  console.log(props)
-
   return (
     <div>
       <br/>
@@ -55,7 +53,7 @@ function Comment(props) {
         (!comment.responseTo && 
           <React.Fragment key={comment._id}>
             <SingleComment refreshFunction={props.refreshFunction} comment={comment} key={index} postId={props.postId}/>
-            <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._Id} CommentLists={comment} postId={props.postId}/>
+            <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} CommentLists={comment} postId={props.postId}/>
 
           </React.Fragment>
         )
