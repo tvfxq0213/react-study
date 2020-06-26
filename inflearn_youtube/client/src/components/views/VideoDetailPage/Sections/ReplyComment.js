@@ -1,6 +1,5 @@
 import React , {useEffect, useState} from 'react'
 import SingleComment from './SingleComment'
-import Axios from 'axios';
 
 
 function ReplyComment(props) {
@@ -26,7 +25,7 @@ function ReplyComment(props) {
 
 
   let renderReplyComment = (parentCommentId) => {
-    props.comment.map((comment, index) => (
+    props.CommentLists.map((comment, index) => (
       <React.Fragment key={comment._id}>
         { comment.responseTo == parentCommentId && 
         <div style={{width:'80%', marginLeft:'40px'}}>
@@ -43,12 +42,13 @@ function ReplyComment(props) {
   }
   
 
+  console.log(props.CommentLists)
   return (
     <div>
       { ChildCommentNumber > 0 &&
         <p style={{fontSize:'14px',margin:0, color: 'gray'}} 
         onClick={onHandleChange}>
-        Vew {ChildCommentNumber} more comment(s)
+        View {ChildCommentNumber} more comment(s)
         </p>
       }
       { OpenReplyComments &&
