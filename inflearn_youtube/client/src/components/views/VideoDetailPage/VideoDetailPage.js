@@ -1,10 +1,12 @@
 import React , { useEffect, useState } from 'react'
-import { List, Avatar, Row, Col, Button  } from 'antd';
+import { List, Avatar, Row, Col  } from 'antd';
 import Axios from 'axios';
 import DeleteBtn from './Sections/deleteBtn.js';
 import SideVideo from './Sections/SideVideo.js';
 import Subscribe from './Sections/Subscribe';
 import Comment from './Sections/Comment';
+import LikeDislikes from './Sections/LikeDislikes';
+
 
 function VideoDetailPage(props) {
 
@@ -17,7 +19,6 @@ function VideoDetailPage(props) {
   const [DeleteBtnShow, setDeleteBtnShow] = useState(false);
 
   const [Comments, setComments] = useState([]);
-  
 
 
 
@@ -26,7 +27,7 @@ function VideoDetailPage(props) {
     .then(response => {
         if (response.data.success) {
             setVideoDetail(response.data.video)
-            if(response.data.video.writer._id == localStorage.getItem('userId')){ 
+            if(response.data.video.writer._id === localStorage.getItem('userId')){ 
               // 작성자와 로그인한 userId가 같아야 삭제 버튼이 나타남
               setDeleteBtnShow(!DeleteBtnShow);
             }
@@ -71,7 +72,7 @@ function VideoDetailPage(props) {
               poster={`http://localhost:5000/${VideoDetail.thumbnail}`}
               controls/>
               <List.Item 
-              actions={[subscribeBtn]}>
+              actions={[<LikeDislikes video userId={localStorage.getItem('userId')} videoId={videoId}/>,subscribeBtn]}>
                 <List.Item.Meta
                   avatar={<Avatar src={VideoDetail.writer.image}></Avatar>}
                   title={VideoDetail.title}
@@ -81,6 +82,9 @@ function VideoDetailPage(props) {
               </List.Item>
               {/*comment */}
               <Comment refreshFunction={updateComment} commentLists={Comments} postId={videoId}/>
+              <div>
+              
+              </div>
            </div>
            <div>
             {DeleteBtnShow ? <DeleteBtn videoId= {videoId} userId={localStorage.getItem('userId')}/> : ''}
