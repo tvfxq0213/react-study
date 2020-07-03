@@ -22,8 +22,6 @@ function LikeDislikes(props) {
     Axios.post('/api/like/getlikes', variable)
     .then(response => {
       if(response.data.success){
-
-        console.log(response.data);
         //얼마나 많은 좋아요를 받았는지
 
         setLikes(response.data.likes.length);
@@ -46,8 +44,6 @@ function LikeDislikes(props) {
     Axios.post('/api/like/getdislikes', variable)
     .then(response => {
       if(response.data.success){
-
-        console.log(response.data);
         //얼마나 많은 싫어요를 받았는지
 
         setDislikes(response.data.dislikes.length);

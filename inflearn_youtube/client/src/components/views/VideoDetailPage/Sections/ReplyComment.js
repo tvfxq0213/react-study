@@ -43,7 +43,7 @@ function ReplyComment(props) {
     setOpenReplyComments(!OpenReplyComments)
   }
   
-  console.log(props);
+  console.log(renderReplyComment);
 
   return (
     <div>
