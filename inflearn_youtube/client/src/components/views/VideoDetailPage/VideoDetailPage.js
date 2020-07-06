@@ -42,7 +42,6 @@ function VideoDetailPage(props) {
     Axios.post('/api/comment/getComment', variable)
     .then(response => {
         if (response.data.success) {
-          console.log(response.data);
           setComments(response.data.comments);
         } else {
             alert('Failed to get video Info')

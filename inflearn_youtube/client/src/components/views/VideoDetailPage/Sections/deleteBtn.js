@@ -9,9 +9,7 @@ function deleteBtn(props) {
   const variable = {
     videoId: props.videoId
   }
-
   const DeleteVideo = (props) => {
-    console.log("erer");
     Axios.post('/api/video/deleteVideo', variable)
     .then(response => {
       if( response.data.success) {
