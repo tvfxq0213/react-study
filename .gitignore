@@ -6,6 +6,7 @@ inflearn_movie/client/src/components/Config.js
 inflearn_youtube/server/config/dev.js
 inflearn_youtube/uploads/*
 inflearn_chatbot/server/config/dev.js
-scheduler/server/config/dev.js
+Portfolio/server/config/dev.js
 
-scheduler/server/node_modules/
+Portfolio/server/node_modules/
+Portfolio/client/node_modules/
