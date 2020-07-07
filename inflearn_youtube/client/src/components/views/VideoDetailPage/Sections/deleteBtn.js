@@ -24,7 +24,7 @@ function deleteBtn(props) {
   if(props.userId) { 
 
     return (
-        <div style={{display:'flex', justifyContent:'flex-end'}}>
+        <div className="btn-wrap" >
           <Button type="primary" danger="true" onClick={DeleteVideo}>Delete</Button>
         </div>
         )
